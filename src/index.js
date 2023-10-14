@@ -1,17 +1,20 @@
+// injecting code from another location
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import Home from './pages/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
+/*
+  --const vs. let--
+  const = a variable that can't be changed
+  let = a dynamic variable
+*/
+const htmlElement = document.getElementById('root'); // locating an HTML element on our DOM
+const root = ReactDOM.createRoot(htmlElement); // root of our React DOM (tree)
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+  <Home></Home> // JSX (JavaScript XML)
+); // rendering the HTML into the container above
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+/*
+  <Home /> = Home();
+*/
