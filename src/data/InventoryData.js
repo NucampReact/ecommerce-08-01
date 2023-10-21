@@ -7,7 +7,7 @@ import xyris from '../images/cards/xyris.jpeg';
 import ancient from '../images/coins/ancient.jpeg';
 import indianHead from '../images/coins/indian-head.jpeg';
 import julius from '../images/coins/julius-caesar.jpg';
-import peru from '../images/coins/peru.jpeg';
+import peru from '../images/coins/peru.png';
 
 const products = [
   {
@@ -64,4 +64,6 @@ const products = [
     price: 200,
     category: 'Coin'
   }
-]
+];
+
+export default products;

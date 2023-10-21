@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Navigation from './common/Navigation';
 import { Container } from 'reactstrap';
 import Inventory from './shop/Inventory';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 /*
   --const vs. let--
   const = a variable that can't be changed
@@ -16,11 +17,15 @@ import Inventory from './shop/Inventory';
 const htmlElement = document.getElementById('root'); // locating an HTML element on our DOM
 const root = ReactDOM.createRoot(htmlElement); // root of our React DOM (tree)
 root.render(
-  <>
+  <BrowserRouter>
     <Navigation />
     <Container>
-      <Home />
-      <Inventory />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Inventory />} />
+      </Routes>
+
     </Container>
-  </>
+  </BrowserRouter>
 );

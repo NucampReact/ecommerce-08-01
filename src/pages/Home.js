@@ -2,18 +2,21 @@ import React from 'react';
 import { Card, CardHeader, CardBody, Row, Col, Button } from 'reactstrap';
 import Title from '../common/Title';
 import Map from '../common/Map';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <Card>
-      <CardHeader tag="h3" className="text-center">
+      <CardHeader className="text-center">
         <Title message="Welcome to Trader's Terrace" />
       </CardHeader>
       <CardBody className="text-center">
         <Row>
           <Col>
             <Title tag="h2" message="Start shopping!" />
-            <Button color="primary" size="lg">Browse Our Inventory</Button>
+            <Button onClick={() => navigate('/shop')} color="primary" size="lg">Browse Our Inventory</Button>
           </Col>
           <Col>
             <Title tag="h2" message="Visit Us In Person!" />

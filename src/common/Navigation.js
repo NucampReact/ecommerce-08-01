@@ -14,6 +14,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import handshake from '../images/handshake.png';
+import { NavLink as ReactRouterNavLink } from 'react-router-dom';
 
 function Navigation(args) {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,13 +32,10 @@ function Navigation(args) {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="container-fluid" navbar>
             <NavItem>
-              <NavLink>Login</NavLink>
+              <NavLink tag={ReactRouterNavLink} to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink>Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>Shop</NavLink>
+              <NavLink tag={ReactRouterNavLink} to="/shop">Shop</NavLink>
             </NavItem> 
             <NavItem className="ms-auto" tag="nav">
             <UncontrolledDropdown nav>
