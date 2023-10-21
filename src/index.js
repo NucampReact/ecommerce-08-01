@@ -7,6 +7,7 @@ import './index.css';
 import Home from './pages/Home';
 import Navigation from './common/Navigation';
 import { Container } from 'reactstrap';
+import Inventory from './shop/Inventory';
 /*
   --const vs. let--
   const = a variable that can't be changed
@@ -19,6 +20,7 @@ root.render(
     <Navigation />
     <Container>
       <Home />
+      <Inventory />
     </Container>
   </>
 );
