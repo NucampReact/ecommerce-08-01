@@ -15,63 +15,72 @@ const products = [
     image: destructor,
     title: 'Destructor',
     price: 123.99,
-    category: 'Card'
+    category: 'Card',
+    stockCount: 5
   },
   {
     id: 2,
     image: frodo,
     title: 'Frodo',
     price: 44.95,
-    category: 'Card'
+    category: 'Card',
+    stockCount: 3
   },
   {
     id: 3,
     image: summon,
     title: 'Summon',
     price: 84.69,
-    category: 'Card'
+    category: 'Card',
+    stockCount: 2
   },
   {
     id: 4,
     image: whitebeard,
     title: 'Whitebeard',
     price: 201,
-    category: 'Card'
+    category: 'Card',
+    stockCount: 8
   },
   {
     id: 5,
     image: xyris,
     title: 'Xyris',
     price: 50.25,
-    category: 'Card'
+    category: 'Card',
+    stockCount: 4
   },
   {
     id: 6,
     image: ancient,
     title: 'Ancient',
     price: 95.95,
-    category: 'Coin'
+    category: 'Coin',
+    stockCount: 5
   },
   {
     id: 7,
     image: indianHead,
     title: 'Indian Head',
     price: 112,
-    category: 'Coin'
+    category: 'Coin',
+    stockCount: 4
   },
   {
     id: 8,
     image: julius,
     title: 'Juluis Caeasar',
     price: 7880,
-    category: 'Coin'
+    category: 'Coin',
+    stockCount: 5
   },
   {
     id: 9,
     image: peru,
     title: 'Peru',
     price: 20000,
-    category: 'Coin'
+    category: 'Coin',
+    stockCount: 5
   }
 ];
 
