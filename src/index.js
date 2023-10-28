@@ -7,8 +7,8 @@ import './index.css';
 import Home from './pages/Home';
 import Navigation from './common/Navigation';
 import { Container } from 'reactstrap';
-import Inventory from './shop/Inventory';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Shop from './pages/Shop';
 /*
   --const vs. let--
   const = a variable that can't be changed
@@ -19,11 +19,11 @@ const root = ReactDOM.createRoot(htmlElement); // root of our React DOM (tree)
 root.render(
   <BrowserRouter>
     <Navigation />
-    <Container>
+    <Container fluid>
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Inventory />} />
+        <Route path="/shop" element={<Shop />} />
       </Routes>
 
     </Container>

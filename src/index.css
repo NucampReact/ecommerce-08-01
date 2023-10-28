@@ -19,3 +19,17 @@ code {
 .leaflet-container {
   height: 200px;
 }
+
+.product .card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-header {
+  background-color: aliceblue;
+}
+
+.card-footer {
+  background-color: floralwhite;
+}

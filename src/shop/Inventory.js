@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardBody, Row, Col, Input, Button, Alert } from 'reactstrap';
+import { Card, CardHeader, CardBody, Row, Col, Input, Button, CardFooter, UncontrolledAlert } from 'reactstrap';
 import products from '../data/InventoryData';
+import Filters from './Filters';
 
 /*
 Data Management within React:
@@ -48,19 +49,25 @@ function Inventory() {
     const max = resultsPerPage > products.length ? products.length : resultsPerPage;
 
     for(let i = 0; i < max; i++) {
-    results.push(
-        <Row key={products[i].title} className="mb-2">
-          <Col>
-            <h3>{products[i].title}</h3>
-            <h4>Price: {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(products[i].price)}</h4>
-          </Col>
-          <Col>
-            <img width="100" src={products[i].image} />
-          </Col>
-          <Col>
-            <Button onClick={addToCart} color="warning">Add to Cart</Button>
-          </Col>
-        </Row>
+      results.push(
+        <Col className="mt-3" xs={12} md={4} key={products[i].id}>
+          <Card className="h-100 product">
+            <CardHeader tag="h5">{products[i].title}</CardHeader>
+            <CardBody className="text-center">
+              <img width="100" src={products[i].image} />
+            </CardBody>
+            <CardFooter>
+              <Row className="d-flex flex-row">
+                <Col className='d-flex flex-column justify-content-center align-items-center'>
+                  <h6><strong>Price</strong>: {new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(products[i].price)}</h6>
+                </Col>
+                <Col className="text-end">
+                  <Button onClick={addToCart} color="warning">Add to Cart</Button>
+                </Col>
+              </Row>
+            </CardFooter>
+          </Card>
+        </Col>
       );
     };
 
@@ -77,21 +84,42 @@ function Inventory() {
   console.log('results per page', resultsPerPage);
 
   return (
-    <Card>
-      <CardHeader tag="h3">Inventory List</CardHeader>
-      <CardBody>
-        <p>Results per page: {resultsPerPage}</p>
-        {message && <Alert type='sucess'>{message}</Alert>}
-        <Input type="select" onChange={handleResultsPerPage}>
-          <option>Please select</option>
-          <option value="1">1</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-        </Input>
-        <hr />
-        {displayProducts()}
-      </CardBody>
-    </Card>
+    <Row>
+      <Col xs={12} md={4}><Filters /></Col>
+      <Col xs={12} md={8}>
+        <Card>
+          <CardHeader tag="h3">Inventory List</CardHeader>
+          <CardBody>
+            <Row>
+              <Col xs={4}></Col>
+              <Col xs={4}>
+                <p>Sort by:</p>
+                <Input type="select">
+                  <option>Please select</option>
+                  <option value="name_asc">Name A-Z</option>
+                  <option value="name_desc">Name Z-A</option>
+                </Input>
+              </Col>
+              <Col xs={4}>
+                <p>Results per page: {resultsPerPage}</p>
+                <Input type="select" onChange={handleResultsPerPage}>
+                  <option>Please select</option>
+                  <option value="1">1</option>
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                </Input>
+              </Col>
+            </Row>
+            {message && <UncontrolledAlert type='sucess'>{message}</UncontrolledAlert>}
+            
+            <hr />
+            <Row className="mb-2">
+              {displayProducts()}
+            </Row>
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
   )
 };
 
