@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ButtonGroup, Card, CardBody, CardFooter, CardHeader, Button, Input, FormGroup, Label } from 'reactstrap';
 import Title from '../common/Title';
 import products from '../data/InventoryData';
+import RangeSlider from 'react-bootstrap-range-slider';
 
 /*
   Filter:
@@ -22,6 +23,7 @@ function Filters(props) {
   const [category, setCategory] = useState();
   const [title, setTitle] = useState();
   const [filterMessage, setFilterMessage] = useState();
+  const [price, setPrice] = useState(50);
 
   // const [filterSelections, setFilterSelections] = useState({});
 
@@ -54,10 +56,15 @@ function Filters(props) {
 
   }
 
+  const clearFilters = () => {
+    setFilterMessage('');
+    props.clearFilterCallback();
+  }
+
   const applyFilters = (event) => {
     // capture all the filters
-    setFilterMessage(`Apply filters: Category = ${category}; Title = ${title}`);
-    props.applyFilterCallback(category, title);
+    setFilterMessage(`Apply filters: Category = ${category}; Title = ${title}; Price = ${price}`);
+    props.applyFilterCallback(category, title, price);
   }
 
   return (
@@ -77,11 +84,15 @@ function Filters(props) {
           <Label>Title</Label>
           <Input onChange={handleTitle} />
         </FormGroup>
+        <FormGroup>
+          <Label>Price Range</Label>
+          <RangeSlider value={price} min={0} max={20000} tooltip='on' onChange={changeEvent => setPrice(changeEvent.target.value)} />
+        </FormGroup>
       </CardBody>
       <CardFooter className='text-end'>
         {filterMessage}
         <ButtonGroup>
-          <Button className="me-3" color="warning">Clear</Button>
+          <Button onClick={clearFilters} className="me-3" color="warning">Clear</Button>
           <Button onClick={applyFilters} color="success">Apply</Button>
         </ButtonGroup>
       </CardFooter>

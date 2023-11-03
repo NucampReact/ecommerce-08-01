@@ -129,10 +129,12 @@ function Inventory() {
     setResultsPerPage(userSelection); // React re-rendering your component
   }
 
-  const applyFiltersToInventory = (category) => {
-    console.log('Applying filters to my inventory', category);
+  const applyFiltersToInventory = (category, title, price) => {
     const filteredProducts = products.filter(product => {
-      return product.category === category;
+      return (product.category === category
+        || product.title.includes(title)
+        || product.price <= price
+      );
     });
     
     setInventoryList(filteredProducts);
@@ -141,7 +143,7 @@ function Inventory() {
   return (
     <Row>
       <Col xs={12} md={4}>
-        <Filters applyFilterCallback={applyFiltersToInventory} />
+        <Filters clearFilterCallback={() => setInventoryList(products)} applyFilterCallback={applyFiltersToInventory} />
       </Col>
       <Col xs={12} md={8}>
         <Card>
