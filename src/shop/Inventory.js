@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody, Row, Col, Input, Button, CardFooter, UncontrolledAlert } from 'reactstrap';
 import products from '../data/InventoryData';
 import Filters from './Filters';
+import { useDispatch, useSelector } from 'react-redux';
 
 /*
 Data Management within React:
@@ -38,10 +39,18 @@ Data Management within React:
 function Inventory() {
   // state setup
   // useState = set up a tracking system on specific data
-  let [resultsPerPage, setResultsPerPage] = useState(products.length);
   const [message, setMessage] = useState();
-  const [inventoryList, setInventoryList] = useState(products);
   const [outOfStockInventory, setOutOfStockInventory] = useState([]);
+
+  const dispatcher = useDispatch();
+
+  const inventoryList = useSelector(function(state) {
+    console.log('state of redux is', state);
+    
+    return state.inventoryList;
+  });
+
+  const resultsPerPage = useSelector(state => state.resultsPerPage);
 
   const initialStockCounts = {};
   products.forEach(product => initialStockCounts[product.title] = product.stockCount);
@@ -50,8 +59,26 @@ function Inventory() {
   const addToCart = (inventoryItem) => {
     const updatedStockCounts = { ...stockCounts, [inventoryItem.title]: stockCounts[inventoryItem.title] - 1 };
     setStockCounts(updatedStockCounts);
+
+    // Describe action object
+    const action = {
+      type: 'ADD_TO_CART', // Unique ID, required property for the dispatcher
+      addedItem: inventoryItem
+    }
+
+    // Send this action to redux reducer
+    dispatcher(action);
   }
 
+  const removeItem = (inventoryItem) => {
+    const action = {
+      type: 'REMOVE_ITEM', // Unique ID, required property for the dispatcher
+      removedItem: inventoryItem
+    }
+
+    // Send this action to redux reducer
+    dispatcher(action);
+  }
 
   /* useEffect hook:
 
@@ -99,6 +126,7 @@ function Inventory() {
         <Col className="mt-3" xs={12} md={4} key={inventoryList[i].id}>
           <Card className="h-100 product" style={{ opacity: outofStock ? '50%' : '100%'}}>
             <CardHeader tag="h5" style={{backgroundColor: outofStock ? 'red' : 'aliceblue'}}>
+              <Button onClick={() => removeItem(inventoryList[i])} color="danger" size={'sm'}>X</Button>&nbsp;
               {inventoryList[i].title} ({stockCounts[inventoryList[i].title]})
             </CardHeader>
             <CardBody className="text-center">
@@ -124,26 +152,19 @@ function Inventory() {
 
   const handleResultsPerPage = (event) => {
     const userSelection = event.target.value; // Capture user selection
-    
-    // Update state
-    setResultsPerPage(userSelection); // React re-rendering your component
+    const action = {
+      type: 'UPDATE_RESULTS_PER_PAGE',
+      resultsPerPage: userSelection
+    }
+    dispatcher(action);
   }
 
-  const applyFiltersToInventory = (category, title, price) => {
-    const filteredProducts = products.filter(product => {
-      return (product.category === category
-        || product.title.includes(title)
-        || product.price <= price
-      );
-    });
-    
-    setInventoryList(filteredProducts);
-  }
-
+  console.log('inventory list', inventoryList);
+  
   return (
     <Row>
       <Col xs={12} md={4}>
-        <Filters clearFilterCallback={() => setInventoryList(products)} applyFilterCallback={applyFiltersToInventory} />
+        <Filters clearFilterCallback={() => {}} />
       </Col>
       <Col xs={12} md={8}>
         <Card>

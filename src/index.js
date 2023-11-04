@@ -10,6 +10,9 @@ import Navigation from './common/Navigation';
 import { Container } from 'reactstrap';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Shop from './pages/Shop';
+import { Provider } from 'react-redux';
+import { MyStore } from './redux/Store';
+
 /*
   --const vs. let--
   const = a variable that can't be changed
@@ -18,15 +21,17 @@ import Shop from './pages/Shop';
 const htmlElement = document.getElementById('root'); // locating an HTML element on our DOM
 const root = ReactDOM.createRoot(htmlElement); // root of our React DOM (tree)
 root.render(
-  <BrowserRouter>
-    <Navigation />
-    <Container fluid>
+  <Provider store={MyStore}>
+    <BrowserRouter>
+      <Navigation />
+      <Container fluid>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+        </Routes>
 
-    </Container>
-  </BrowserRouter>
+      </Container>
+    </BrowserRouter>
+  </Provider>
 );

@@ -3,6 +3,7 @@ import { ButtonGroup, Card, CardBody, CardFooter, CardHeader, Button, Input, For
 import Title from '../common/Title';
 import products from '../data/InventoryData';
 import RangeSlider from 'react-bootstrap-range-slider';
+import { useDispatch } from 'react-redux';
 
 /*
   Filter:
@@ -24,6 +25,8 @@ function Filters(props) {
   const [title, setTitle] = useState();
   const [filterMessage, setFilterMessage] = useState();
   const [price, setPrice] = useState(50);
+
+  const dispatcher = useDispatch();
 
   // const [filterSelections, setFilterSelections] = useState({});
 
@@ -58,13 +61,26 @@ function Filters(props) {
 
   const clearFilters = () => {
     setFilterMessage('');
-    props.clearFilterCallback();
+    const action = {
+      type: 'CLEAR_FILTERS'
+    }
+
+    dispatcher(action);
   }
 
   const applyFilters = (event) => {
     // capture all the filters
     setFilterMessage(`Apply filters: Category = ${category}; Title = ${title}; Price = ${price}`);
-    props.applyFilterCallback(category, title, price);
+    
+    const action = {
+      type: 'APPLY_FILTERS',
+      filters: {
+        category,
+        title,
+        price
+      }
+    }
+    dispatcher(action);
   }
 
   return (
