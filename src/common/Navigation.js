@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -27,13 +27,37 @@ function Navigation(args) {
 
   const cartItems = useSelector(state => state.cart);
 
-  const removeFromCart = (itemToRemove) => {
-    const action = {
-      type: 'REMOVE_FROM_CART',
-      removedItem: itemToRemove
-    }
+  useEffect(() => {
+    fetch('http://localhost:3001/cart')
+      .then(async(response) => {
+        // after retrieving items from database
+        const data = await response.json();
 
-    dispatcher(action)
+        const action = {
+          type: 'LOAD_CART',
+          cartItems: data
+        };
+        dispatcher(action);
+      })
+      .catch(error => console.error('Could not fetch cart'));
+  }, [])
+
+
+  const removeFromCart = (itemToRemove) => {
+    fetch('http://localhost:3001/cart/'+itemToRemove.id, {
+      method: 'DELETE'
+    })
+      .then((response) => {
+        const action = {
+          type: 'REMOVE_FROM_CART',
+          removedItem: itemToRemove
+        }
+    
+        dispatcher(action)
+      })
+      .catch(error => console.error('Could not remove item from cart'))
+
+
   }
 
   return (

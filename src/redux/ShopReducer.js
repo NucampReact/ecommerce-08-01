@@ -1,8 +1,6 @@
-import products from '../data/InventoryData';
-
 const initialState = {
-  inventoryList: products,
-  resultsPerPage: products.length,
+  inventoryList: [],
+  resultsPerPage: 0,
   cart: []
 }
 
@@ -53,6 +51,12 @@ function ShopReducer(state = initialState, action) {
     });
 
     return { ...state, cart: updatedCart }
+  }
+  else if (action.type === 'LOAD_INVENTORY') {
+    return { ...state, inventoryList: action.inventory, resultsPerPage: action.inventory.length }
+  }
+  else if (action.type === 'LOAD_CART') {
+    return { ...state, cart: action.cartItems }
   }
   else {
     return initialState;

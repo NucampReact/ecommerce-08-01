@@ -61,23 +61,46 @@ function Inventory() {
     setStockCounts(updatedStockCounts);
 
     // Describe action object
-    const action = {
-      type: 'ADD_TO_CART', // Unique ID, required property for the dispatcher
-      addedItem: inventoryItem
-    }
-
-    // Send this action to redux reducer
-    dispatcher(action);
+    fetch('http://localhost:3001/cart', {
+      method: 'POST',
+      body: JSON.stringify(inventoryItem),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        const action = {
+          type: 'ADD_TO_CART', // Unique ID, required property for the dispatcher
+          addedItem: inventoryItem
+        }
+    
+        // Send this action to redux reducer
+        dispatcher(action);
+      })
+      .catch(error => console.error('Could not save item into cart'))
   }
 
-  const removeItem = (inventoryItem) => {
-    const action = {
-      type: 'REMOVE_ITEM', // Unique ID, required property for the dispatcher
-      removedItem: inventoryItem
-    }
+  // CRUD = Create, Read, Update, Delete
 
-    // Send this action to redux reducer
-    dispatcher(action);
+  const removeItem = (inventoryItem) => {
+    // delete the iventory item from the database
+    fetch('http://localhost:3001/inventory/'+inventoryItem.id, {
+      method: 'DELETE'
+    })
+      .then(response => {
+        const action = {
+          type: 'REMOVE_ITEM', // Unique ID, required property for the dispatcher
+          removedItem: inventoryItem
+        }
+
+        // Send this action to redux reducer
+        dispatcher(action);
+      })
+      .catch(error => {
+        console.error('Couldnt delete inventory')
+      })
+
+    
   }
 
   /* useEffect hook:

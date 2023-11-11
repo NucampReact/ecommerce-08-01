@@ -1,0 +1,71 @@
+{
+  "users": [],
+  "cart": [
+    {
+      "id": 4,
+      "image": "http://localhost:3001/assets/cards/whitebeard.webp",
+      "title": "Whitebeard",
+      "price": 201,
+      "category": "Card",
+      "stockCount": 8
+    }
+  ],
+  "inventory": [
+    {
+      "id": 1,
+      "image": "http://localhost:3001/assets/cards/destructor.jpeg",
+      "title": "Destructor",
+      "price": 123.99,
+      "category": "Card",
+      "stockCount": 5
+    },
+    {
+      "id": 3,
+      "image": "http://localhost:3001/assets/cards/summon.jpeg",
+      "title": "Summon",
+      "price": 84.69,
+      "category": "Card",
+      "stockCount": 2
+    },
+    {
+      "id": 4,
+      "image": "http://localhost:3001/assets/cards/whitebeard.webp",
+      "title": "Whitebeard",
+      "price": 201,
+      "category": "Card",
+      "stockCount": 8
+    },
+    {
+      "id": 5,
+      "image": "http://localhost:3001/assets/cards/xyris.jpeg",
+      "title": "Xyris",
+      "price": 50.25,
+      "category": "Card",
+      "stockCount": 4
+    },
+    {
+      "id": 7,
+      "image": "http://localhost:3001/assets/coins/indian-head.jpeg",
+      "title": "Indian Head",
+      "price": 112,
+      "category": "Coin",
+      "stockCount": 4
+    },
+    {
+      "id": 8,
+      "image": "http://localhost:3001/assets/coins/julius-caesar.jpg",
+      "title": "Juluis Caeasar",
+      "price": 7880,
+      "category": "Coin",
+      "stockCount": 5
+    },
+    {
+      "id": 9,
+      "image": "http://localhost:3001/assets/coins/peru.png",
+      "title": "Peru",
+      "price": 20000,
+      "category": "Coin",
+      "stockCount": 5
+    }
+  ]
+}
